@@ -37,9 +37,9 @@ public class BoardController {
 	
 	// 2. 게시판 글 보기
 	@GetMapping("/view")
-	public String view(Model model, long no, int inc) throws Exception {
+	public String view(Model model, long no, int inc) throws Exception {	// 처리된 Data를 JSP에 전달 || no & inc = 숫자 Type : 원래는 String Type으로 Data 전달, 없으면 null => null을 숫자로 변환하는 과정에서 오류가 발생
 		
-		log.info(MODUEL + "글 보기 -------------------------------");
+		log.info(MODUEL + " 글 보기 -------------------------------");
 		
 		model.addAttribute("vo", service.view(no, inc));
 		
@@ -51,7 +51,7 @@ public class BoardController {
 	@GetMapping("/write")
 	public String writeForm() throws Exception {
 		
-		log.info(MODUEL + "리스트 -------------------------------");
+		log.info(MODUEL + " 글 쓰기 -------------------------------");
 		
 		return MODUEL + "/write";
 		
