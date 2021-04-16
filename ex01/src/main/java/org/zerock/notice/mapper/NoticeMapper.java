@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.zerock.notice.vo.NoticeVO;
 
+import com.webjjang.util.PageObject;
+
 public interface NoticeMapper {
 
-	public List<NoticeVO> list();
+	public List<NoticeVO> list(PageObject pageObject);
 	
-	public long getTotalRow();
+	public Long getTotalRow(PageObject pageObject);
 	
 	public NoticeVO view(long no);
 	

@@ -26,6 +26,7 @@
  <div class="container">
   <h1>게시판 글 쓰기</h1>
   <form action="write" method="post" id="writeForm">
+   <input name="perPageNum" type="hidden" value="${param.perPageNum }">
    <div class="form-group">
    <!-- requiered : 필수 입력 || placeholder : 입력외 초기 안내 -->
    <!-- pattern : 정규표현식으로 유효성 검사 || title : 페턴이 맞지 않을 때의 메시지 -->

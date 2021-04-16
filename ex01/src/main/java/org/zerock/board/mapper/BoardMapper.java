@@ -4,14 +4,16 @@ import java.util.List;
 
 import org.zerock.board.vo.BoardVO;
 
+import com.webjjang.util.PageObject;
+
 // 검색, page에 필요한 것이 있으면 pageObject를 만들어서 추가해야 한다.
 public interface BoardMapper {
 	
 	// 1. 게시판 리스트
-	public List<BoardVO> list();
+	public List<BoardVO> list(PageObject pageObject);
 	
 	// 1-1. 게시판 리스트 페이지 처리를 위한 전체 데이터 개수 가져오기
-	public Long getTotalRow();
+	public Long getTotalRow(PageObject pageObject);
 
 	// 2. 게시판 글 보기
 	public BoardVO view(Long no);

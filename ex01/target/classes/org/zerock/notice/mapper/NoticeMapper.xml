@@ -4,14 +4,45 @@
 <mapper namespace="org.zerock.notice.mapper.NoticeMapper">
 
 	<select id="list" resultType="org.zerock.notice.vo.NoticeVO">
-		SELECT no, title, startDate, endDate, writeDate, updateDate
-		FROM notice
-		ORDER BY no DESC
+		SELECT rnum, no, title, startDate, endDate, writeDate, updateDate
+		FROM(
+			SELECT rownum rnum, no, title, startDate, endDate, writeDate, updateDate
+			FROM(
+				SELECT no, title, startDate, endDate, writeDate, updateDate
+				FROM notice
+				<include refid="search"/>
+				ORDER BY no DESC
+			)
+		)
+		WHERE rnum BETWEEN #{startRow} AND #{endRow}
 	</select>
 	
-	<select id="getTotalRow">
+	<select id="getTotalRow" resultType="java.lang.Long">
 		SELECT count(*) FROM notice
+		<include refid="search"/>
 	</select>
+	
+	<sql id="search">
+		<if test="word != null and word != ''">
+			WHERE 1 = 0
+			<if test="key == 't'.toString()">
+				OR title like '%' || #{word} || '%'
+			</if>
+			<if test="key == 'c'.toString()">
+				OR content like '%' || #{word} || '%'
+			</if>
+			<if test="key == 's'.toString()">
+				OR wtartDate like '%' || #{word} || '%'
+			</if>
+			<if test="key == 'e'.toString()">
+				OR endDate like '%' || #{word} '%'
+			</if>
+			<if test="key == 'tc'.toString()">
+				OR title like '%' || #{word} '%'
+				OR content like '%' || #{word} '%'
+			</if>
+		</if>
+	</sql>
 
 	<insert id="write">
 		INSERT INTO notice(no, title, content, startDate, endDate)

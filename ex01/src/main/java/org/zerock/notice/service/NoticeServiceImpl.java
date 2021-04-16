@@ -9,7 +9,12 @@ import org.springframework.stereotype.Service;
 import org.zerock.notice.mapper.NoticeMapper;
 import org.zerock.notice.vo.NoticeVO;
 
+import com.webjjang.util.PageObject;
+
+import lombok.extern.log4j.Log4j;
+
 @Service
+@Log4j
 @Qualifier("nsi")
 public class NoticeServiceImpl implements NoticeService {
 	
@@ -17,18 +22,14 @@ public class NoticeServiceImpl implements NoticeService {
 	private NoticeMapper mapper;
 	
 	@Override
-	public List<NoticeVO> list() throws Exception {
+	public List<NoticeVO> list(PageObject pageObject) throws Exception {
 		// TODO Auto-generated method stub
 		
-		return mapper.list();
+		pageObject.setTotalRow(mapper.getTotalRow(pageObject));
 		
-	}
-
-	@Override
-	public long getTotalRow() throws Exception {
-		// TODO Auto-generated method stub
+		log.info("pageObject : " + pageObject);
 		
-		return mapper.getTotalRow();
+		return mapper.list(pageObject);
 		
 	}
 

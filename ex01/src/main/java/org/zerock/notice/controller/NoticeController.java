@@ -6,11 +6,14 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.notice.service.NoticeService;
 import org.zerock.notice.vo.NoticeVO;
+
+import com.webjjang.util.PageObject;
 
 import lombok.extern.log4j.Log4j;
 
@@ -26,11 +29,13 @@ public class NoticeController {
 	private final String MODUEL = "notice";
 	
 	@GetMapping("/list")
-	public String List(Model model) throws Exception {
+	public String List(Model model, @ModelAttribute PageObject pageObject) throws Exception {
 		
 		log.info(MODUEL + " list().................");
 		
-		model.addAttribute("list", service.list());
+		log.info(pageObject + " list().................");
+		
+		model.addAttribute("list", service.list(pageObject));
 		
 		return MODUEL + "/list";
 		

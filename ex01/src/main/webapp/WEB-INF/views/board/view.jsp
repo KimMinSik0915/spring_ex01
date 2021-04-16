@@ -18,7 +18,6 @@
 	}
 </style>
 <script type="text/javascript">
-
 	$(function() {
 		
 		${(empty msg)?"":"alert('" += msg += "')"}
@@ -85,9 +84,9 @@
     <div class="col-md-10">${vo.hit }</div>
    </li>
   </ul>
-  <a href="update?no=${vo.no }" class="btn btn-default">수정</a>
+  <a href="update?no=${vo.no }&page=${pageObject.page}&perPageNum=${pageObject.perPageNum}&key=${pageObject.key}&word=${pageObject.word}" class="btn btn-default">수정</a>
   <button class="btn btn-default"  data-toggle="modal" data-target="#delete">삭제</button>
-  <a href="list" class="btn btn-default">리스트</a>
+  <a href="list?page=${pageObject.page }&perPageNum=${pageObject.perPageNum}&key=${pageObject.key}&word=${pageObject.word}" class="btn btn-default">리스트</a>
  </div>
  <div class="modal fade" id="delete" role="dialog">
   <div class="modal-dialog">
@@ -97,8 +96,9 @@
      <h4 class="modal-title">게시판 글 삭제 비밀번호 입력</h4>
     </div>
     <div class="modal-body">
-     <form action="delete" method="post" id="modal_form">
+     <form action="delete?perPageNum=${pageObject.perPageNum }" method="post" id="modal_form">
       <input type="hidden" name="no" value="${vo.no }">
+      <input type="hidden" name="perPageNum" value="${pageObjcet.perPageNum }">
       <div class="form-group">
        <label for="pw">비밀번호:</label>
        <input class="form-control" name="pw" id="pw" type="password" pattern="[^가-힣ㄱ-ㅎㅏ-ㅣ]{4,20}" required="required" maxlength="20" title="한글은 입력할 수 없습니다.">

@@ -28,6 +28,10 @@
   <form action="update" method="post" id="updateForm">
    <div class="form-group">
     <input class="form-control" name="no" id="no" readonly="readonly" value="${vo.no }" type="hidden">
+    <input type="hidden" name="page" value="${param.page }">
+    <input type="hidden" name="perPageNum" value="${param.perPageNum }">
+    <input type="hidden" name="key" value="${param.key }">
+    <input type="hidden" name="word" value="${param.word}">
    </div>
    <div class="form-group">
    <!-- requiered : 필수 입력 || placeholder : 입력외 초기 안내 -->
@@ -51,7 +55,6 @@
    <button class="btn btn-default">수정</button>
    <button class="btn btn-default" type="reset">새로 입력</button>
    <button class="btn btn-default cancelBackBtn" type="button">취소</button>
-   <button class="btn btn-default cancelBackBtn" type="button" data-toggle="modal" data-target="#delete">취소</button>
   </form>
  </div>
 </body>
